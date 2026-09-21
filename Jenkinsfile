@@ -27,6 +27,8 @@ pipeline {
     post {
         always {
             echo 'Pipeline execution completed.'
+            sh 'npm list --depth=0 > dependency-report.txt || true'
+            archiveArtifacts artifacts: 'dependency-report.txt', fingerprint: true            
         }
 
         success {
