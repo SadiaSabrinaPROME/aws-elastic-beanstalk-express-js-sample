@@ -16,6 +16,13 @@ pipeline {
                 sh 'npm test'
             }
         }
+        stage('Docker Image Creation'){
+            steps {
+                echo 'Creating Docker image...'
+                sh 'docker build -t isec6000-app:${BUILD_NUMBER} .'
+                sh 'docker images | head'
+            }
+        }
         stage('Security Scan') {
            steps {
                echo 'Scanning dependencies for vulnerabilities...'
